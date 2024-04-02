@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   ScrollView,
+  TouchableHighlight,
 } from "react-native";
 import {
   useFonts,
@@ -14,15 +15,19 @@ import {
   KaiseiDecol_500Medium,
   KaiseiDecol_700Bold,
 } from "@expo-google-fonts/kaisei-decol";
+import { setCustomText } from "react-native-global-props";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const HomePage = () => {
-  let [fontsLoaded] = useFonts({
+function HomePage({ navigation }) {
+    let [fontsLoaded] = useFonts({
     KaiseiDecol_400Regular,
     KaiseiDecol_500Medium,
     KaiseiDecol_700Bold,
   });
+  setCustomText(customTextProps);
   const handleConvertPress = () => {
-    // Handle the convert press event here
+    navigation.navigate('RecipePage');
   };
   if (!fontsLoaded) {
     return;
@@ -38,11 +43,9 @@ const HomePage = () => {
             placeholder="https://never-gonna-give-up-video"
             // You'll want to update this state with the actual value
           />
-          <Button
-            titleStyle={{ fontFamily: "KaiseiDecol_400Regular", fontSize: 16 }}
-            title="Convert"
-            onPress={handleConvertPress}
-          >Convert</Button>
+          <TouchableHighlight onPress={handleConvertPress}>
+            <Text style={{fontFamily: "KaiseiDecol_400Regular"}}>Convert</Text>
+          </TouchableHighlight>
         </View>
         <View style={styles.recentRecipes}>
           <View style={styles.recipeCard}>
@@ -67,6 +70,12 @@ const HomePage = () => {
   }
 };
 export default HomePage;
+
+const customTextProps = {
+  style: {
+    fontFamily: "KaiseiDecol_400Regular",
+  },
+};
 
 const styles = StyleSheet.create({
   container: {

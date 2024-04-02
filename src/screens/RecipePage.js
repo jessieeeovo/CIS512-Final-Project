@@ -1,8 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import recipeData from '../../assets/recipes.json';
+import React, { useState, useRef, useEffect } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import recipeData from "../../assets/butter_chicken_recipe.json";
 
-const RecipePage = () => {
+function RecipePage() {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [timer, setTimer] = useState(0);
   const [timerRunning, setTimerRunning] = useState(false);
@@ -50,7 +56,7 @@ const RecipePage = () => {
   const formatTime = () => {
     const minutes = Math.floor(timer / 60);
     const seconds = timer % 60;
-    return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   return (
@@ -65,13 +71,20 @@ const RecipePage = () => {
         {steps.map((step, index) => (
           <View key={index} style={styles.stepContainer}>
             <Text style={styles.stepTitle}>{step.title}</Text>
-            <Text style={[styles.stepText, currentStepIndex === index && styles.highlightedStep]}>
+            <Text
+              style={[
+                styles.stepText,
+                currentStepIndex === index && styles.highlightedStep,
+              ]}
+            >
               {step.instructions}
             </Text>
             {currentStepIndex === index && step.ingredients.length > 0 && (
               <View style={styles.ingredientsContainer}>
                 {step.ingredients.map((ingredient, ingredientIndex) => (
-                  <Text key={ingredientIndex} style={styles.ingredientText}>{ingredient}</Text>
+                  <Text key={ingredientIndex} style={styles.ingredientText}>
+                    {ingredient}
+                  </Text>
                 ))}
               </View>
             )}
@@ -82,14 +95,18 @@ const RecipePage = () => {
       {currentStepIndex === 8 && (
         <View style={styles.timerContainer}>
           <Text style={styles.timerText}>{formatTime()}</Text>
-          <TouchableOpacity onPress={startTimer} style={styles.button} disabled={timerRunning || timer === 0}>
+          <TouchableOpacity
+            onPress={startTimer}
+            style={styles.button}
+            disabled={timerRunning || timer === 0}
+          >
             <Text style={styles.buttonText}>Start Timer</Text>
           </TouchableOpacity>
         </View>
       )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   pageContainer: {
@@ -97,8 +114,8 @@ const styles = StyleSheet.create({
   },
   recipeTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginVertical: 20,
   },
   scrollContainer: {
@@ -107,53 +124,53 @@ const styles = StyleSheet.create({
   stepContainer: {
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: "#ddd",
   },
   stepTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   stepText: {
     fontSize: 16,
     // Add your styles for step text
   },
   highlightedStep: {
-    color: '#604933',
+    color: "#604933",
   },
   ingredientsContainer: {
     marginTop: 10,
-    color: '#A9B388',
+    color: "#A9B388",
   },
   ingredientText: {
     fontSize: 16,
-    color : '#604933',
+    color: "#604933",
   },
   timerContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     left: 20,
     right: 20,
-    backgroundColor: '#5f6f52',
+    backgroundColor: "#5f6f52",
     padding: 10,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   timerText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   button: {
     marginTop: 10,
-    backgroundColor: '#A9B388',
+    backgroundColor: "#A9B388",
     padding: 10,
     borderRadius: 5,
   },
   buttonText: {
-    color: '#FFFCF2',
-    fontWeight: 'bold',
+    color: "#FFFCF2",
+    fontWeight: "bold",
   },
 });
 
