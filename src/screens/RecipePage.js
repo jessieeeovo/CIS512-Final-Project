@@ -30,7 +30,6 @@ function RecipePage() {
   const scrollRef = useRef(null);
   const { steps } = recipeData;
   const goBack = () => {
-    // Make sure you have navigation passed in as a prop if you are using React Navigation
     navigation.navigate('HomePage');
   };
 
@@ -55,21 +54,28 @@ function RecipePage() {
     };
   }, [timerRunning, timer]);
 
+  useEffect(() => {
+    if (currentStepIndex === 8) {
+      setTimer(120);
+    } else {
+      setTimer(0);
+      setTimerRunning(false);
+    }
+  }, [currentStepIndex]);
+
+
+
   const onScroll = (event) => {
     const offsetY = event.nativeEvent.contentOffset.y;
     const viewportCenter = offsetY + windowHeight / 2;
-  
-    // Calculate the index of the step that should be highlighted based on the scroll position.
+
     const currentStep = Math.floor((viewportCenter - (windowHeight / 2 - stepHeight / 2)) / stepHeight);
-    
+
     setCurrentStepIndex(currentStep);
   };
-  
-  
-  
 
   const startTimer = () => {
-    setTimerRunning(true);
+    setTimerRunning((running) => !running);
   };
 
   const formatTime = () => {
@@ -80,14 +86,13 @@ function RecipePage() {
 
   return (
     <View style={styles.pageContainer}>
-     
-     <View style={styles.backButtonWrapper}>
-  <TouchableOpacity onPress={goBack} style={styles.backButton}>
- 
-    <Text style={styles.backButtonText}>Back</Text>
-  </TouchableOpacity>
-</View>
 
+      <View style={styles.backButtonWrapper}>
+        <TouchableOpacity onPress={goBack} style={styles.backButton}>
+
+          <Text style={styles.backButtonText}>Back</Text>
+        </TouchableOpacity>
+      </View>
 
       <ScrollView
         ref={scrollRef}
@@ -99,58 +104,58 @@ function RecipePage() {
         snapToAlignment={'start'}
         decelerationRate="fast"
         contentContainerStyle={{
-          paddingTop: 50, 
+          paddingTop: 50,
           paddingBottom: windowHeight / 2 - stepHeight / 2,
           paddingLeft: 0,
         }}
       >
         {steps.map((step, index) => (
           <View key={index} style={styles.stepContainer}>
-          <Text
-            style={[
-              styles.stepText,
-              currentStepIndex === index ? styles.highlightedStep : {}
-            ]}
-          >
-            {index + 1}. {step.instructions}
-          </Text>
-        </View>
-        
+            <Text
+              style={[
+                styles.stepText,
+                currentStepIndex === index ? styles.highlightedStep : {}
+              ]}
+            >
+              {index + 1}. {step.instructions}
+            </Text>
+          </View>
+
         ))}
       </ScrollView>
       <View style={styles.ingredientsContainer}>
-  <Text style={styles.ingredientsTitle}>Ingredients</Text>
-  {steps[currentStepIndex] && steps[currentStepIndex].ingredients.map((ingredient, ingredientIndex) => (
-    <Text key={ingredientIndex} style={styles.ingredientText}>
-      {"\u2022"} {ingredient}
-    </Text>
-  ))}
-</View>
+        <Text style={styles.ingredientsTitle}>Ingredients</Text>
+        {steps[currentStepIndex] && steps[currentStepIndex].ingredients.map((ingredient, ingredientIndex) => (
+          <Text key={ingredientIndex} style={styles.ingredientText}>
+            {"\u2022"} {ingredient}
+          </Text>
+        ))}
+      </View>
 
-      {timerRunning && (
-        <View style={styles.timerContainer}>
-          <Text style={styles.timerText}>{formatTime()}</Text>
-          <TouchableOpacity onPress={startTimer} style={styles.button}>
-            <Text style={styles.buttonText}>Start Timer</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <View style={styles.timerContainer}>
+        <Text style={styles.timerText}>{formatTime()}</Text>
+        <TouchableOpacity onPress={() => timerRunning ? startTimer(0) : startTimer(120)} style={styles.button}>
+          <Text style={styles.buttonText}>{timerRunning ? 'Stop Timer' : 'Start Timer'}</Text>
+        </TouchableOpacity>
+      </View>
+
+
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   headerContainer: {
-    height: 50, // adjust as needed
+    height: 50,
     justifyContent: 'center',
     paddingHorizontal: 20,
-    backgroundColor: '#FFFCF2', // match your page background
+    backgroundColor: '#FFFCF2',
   },
   stepsContainer: {
     flex: 0.7,
     paddingLeft: 60,
     backgroundColor: '#FFFCF2',
-    paddingTop: 100, 
+    paddingTop: 100,
     paddingRight: 40,
   },
   pageContainer: {
@@ -169,14 +174,14 @@ const styles = StyleSheet.create({
     fontFamily: "KaiseiDecol_400Regular",
   },
   highlightedStep: {
-    color: '#604933', 
+    color: '#604933',
     fontWeight: 'bold',
   },
   ingredientsContainer: {
     flex: 0.3,
     padding: 10,
     backgroundColor: '#A9B388',
-    paddingTop: 50, 
+    paddingTop: 50,
     paddingLeft: 20,
   },
   ingredientsTitle: {
@@ -193,29 +198,53 @@ const styles = StyleSheet.create({
   },
   timerContainer: {
     position: 'absolute',
+
     bottom: 20,
-    left: '35%',
-    right: '35%',
     backgroundColor: '#5f6f52',
-    padding: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#fff',
-    alignItems: 'center',
+    padding: 20,
+    borderRadius: 20,
     justifyContent: 'center',
+    alignItems: 'center',
+    right: 35,
   },
   timerText: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 48,
+    fontWeight: '600',
+    color: '#FFFCF2',
+    marginBottom: 10,
+    fontFamily: "KaiseiDecol_400Regular",
   },
+  buttonText: {
+    fontSize: 20,
+    color: '#FFFCF2',
+    fontWeight: '600',
+    fontFamily: "KaiseiDecol_400Regular",
+
+
+  },
+  button: {
+    backgroundColor: '#A9B388',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 10,
+    fontFamily: "KaiseiDecol_400Regular",
+    alignSelf: 'center',
+
+  },
+
+
+
   backButtonWrapper: {
     position: 'absolute',
     top: Platform.OS === 'ios' ? 40 : 20,
     left: 10,
-    backgroundColor: '#A9B388', 
-    width: 100, // Adjust the width as necessary
-    height: 40, // Adjust the height as necessary
-    borderRadius: 30, // This will ensure the view is elliptical
+    backgroundColor: '#A9B388',
+    width: 100,
+    height: 40,
+    borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 10,
@@ -226,12 +255,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   backButtonText: {
-    color: '#FFFCF2', 
-    marginLeft: 0, 
+    color: '#FFFCF2',
+    marginLeft: 0,
     fontFamily: "KaiseiDecol_400Regular",
     fontSize: 20,
   },
-  
+
 });
 
 export default RecipePage;
