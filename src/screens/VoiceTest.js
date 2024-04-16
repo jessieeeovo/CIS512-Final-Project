@@ -1,7 +1,14 @@
-import React, { Component } from "react"
-import { StyleSheet, Text, View, Image, TouchableHighlight } from "react-native"
+import React, { Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableHighlight,
+} from "react-native";
 
-import Voice from "@react-native-voice/voice"
+import Voice from "@react-native-voice/voice";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 class VoiceTest extends Component {
   state = {
@@ -11,66 +18,65 @@ class VoiceTest extends Component {
     end: "",
     started: "",
     results: [],
-    partialResults: []
-  }
+    partialResults: [],
+  };
 
   constructor(props) {
-    super(props)
-    Voice.onSpeechStart = this.onSpeechStart
-    Voice.onSpeechRecognized = this.onSpeechRecognized
-    Voice.onSpeechEnd = this.onSpeechEnd
-    Voice.onSpeechError = this.onSpeechError
-    Voice.onSpeechResults = this.onSpeechResults
+    super(props);
+    Voice.onSpeechStart = this.onSpeechStart;
+    Voice.onSpeechRecognized = this.onSpeechRecognized;
+    Voice.onSpeechEnd = this.onSpeechEnd;
+    Voice.onSpeechError = this.onSpeechError;
+    Voice.onSpeechResults = this.onSpeechResults;
   }
 
   componentWillUnmount() {
-    Voice.destroy().then(Voice.removeAllListeners)
+    Voice.destroy().then(Voice.removeAllListeners);
   }
 
-  onSpeechStart = e => {
-    console.log("onSpeechStart: ", e)
+  onSpeechStart = (e) => {
+    console.log("onSpeechStart: ", e);
     this.setState({
-      started: "√"
-    })
-  }
+      started: "√",
+    });
+  };
 
-  onSpeechRecognized = e => {
-    console.log("onSpeechRecognized: ", e)
+  onSpeechRecognized = (e) => {
+    console.log("onSpeechRecognized: ", e);
     this.setState({
-      recognized: "√"
-    })
-  }
+      recognized: "√",
+    });
+  };
 
-  onSpeechEnd = e => {
-    console.log("onSpeechEnd: ", e)
+  onSpeechEnd = (e) => {
+    console.log("onSpeechEnd: ", e);
     this.setState({
-      end: "√"
-    })
-  }
+      end: "√",
+    });
+  };
 
-  onSpeechError = e => {
-    console.log("onSpeechError: ", e)
+  onSpeechError = (e) => {
+    console.log("onSpeechError: ", e);
     this.setState({
-      error: JSON.stringify(e.error)
-    })
-  }
+      error: JSON.stringify(e.error),
+    });
+  };
 
-  onSpeechResults = e => {
-    console.log("onSpeechResults: ", e)
+  onSpeechResults = (e) => {
+    console.log("onSpeechResults: ", e);
     if (e.value[0].toLowerCase().includes("next")) {
-      console.log("NEXT!")
+      console.log("NEXT!");
       this.props["onNext"]();
       this._destroyRecognizer();
       setTimeout(this._startRecognizing, 3000);
-
     }
     if (e.value[0].toLowerCase().includes("go back")) {
-      console.log("GO BACK!")
+      console.log("GO BACK!");
       this.props["onBack"]();
       this._destroyRecognizer();
       setTimeout(this._startRecognizing, 3000);
     }
-  }
+  };
 
   _startRecognizing = async () => {
     this.setState({
@@ -80,37 +86,37 @@ class VoiceTest extends Component {
       started: "",
       results: [],
       partialResults: [],
-      end: ""
-    })
+      end: "",
+    });
 
     try {
-      await Voice.start("en-US")
+      await Voice.start("en-US");
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
-  }
+  };
 
   _stopRecognizing = async () => {
     try {
-      await Voice.stop()
+      await Voice.stop();
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
-  }
+  };
 
   _cancelRecognizing = async () => {
     try {
-      await Voice.cancel()
+      await Voice.cancel();
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
-  }
+  };
 
   _destroyRecognizer = async () => {
     try {
-      await Voice.destroy()
+      await Voice.destroy();
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
     this.setState({
       recognized: "",
@@ -119,9 +125,9 @@ class VoiceTest extends Component {
       started: "",
       results: [],
       partialResults: [],
-      end: ""
-    })
-  }
+      end: "",
+    });
+  };
 
   render() {
     return (
@@ -153,9 +159,14 @@ class VoiceTest extends Component {
       //     )
       //   })}
       //   <Text style={styles.stat}>{`End: ${this.state.end}`}</Text>
-        <TouchableHighlight onPress={this._startRecognizing}>
-          <Image style={styles.button} source={require("../../assets/icon.png")} />
-        </TouchableHighlight>
+      <TouchableHighlight onPress={this._startRecognizing}>
+        <FontAwesome
+          name="volume-up"
+          size={30}
+          color={"#5F6F52"}
+          style={styles.searchIcon}
+        />
+      </TouchableHighlight>
       //   <TouchableHighlight onPress={this._stopRecognizing}>
       //     <Text style={styles.action}>Stop Recognizing</Text>
       //   </TouchableHighlight>
@@ -166,42 +177,42 @@ class VoiceTest extends Component {
       //     <Text style={styles.action}>Destroy</Text>
       //   </TouchableHighlight>
       // </View>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   button: {
     width: 50,
-    height: 50
+    height: 50,
   },
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    backgroundColor: "#F5FCFF",
   },
   welcome: {
     fontSize: 20,
     textAlign: "center",
-    margin: 10
+    margin: 10,
   },
   action: {
     textAlign: "center",
     color: "#0000FF",
     marginVertical: 5,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   instructions: {
     textAlign: "center",
     color: "#333333",
-    marginBottom: 5
+    marginBottom: 5,
   },
   stat: {
     textAlign: "center",
     color: "#B0171F",
-    marginBottom: 1
-  }
-})
+    marginBottom: 1,
+  },
+});
 
-export default VoiceTest
+export default VoiceTest;
