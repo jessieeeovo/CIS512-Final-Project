@@ -21,6 +21,7 @@ import {
 const windowHeight = Dimensions.get("window").height;
 const stepHeight = windowHeight / 8;
 
+
 function RecipePage() {
   const navigation = useNavigation();
   let [fontsLoaded] = useFonts({
@@ -36,6 +37,12 @@ function RecipePage() {
   const { steps } = recipeData;
   const goBack = () => {
     navigation.navigate("HomePage");
+  };
+
+  const allIngredients = new Set(recipeData.steps.flatMap(step => step.ingredients));
+  const allIngredientsArray = Array.from(allIngredients);
+  const isIngredientInCurrentStep = (ingredient) => {
+    return recipeData.steps[currentStepIndex]?.ingredients.includes(ingredient);
   };
 
   useEffect(() => {
@@ -96,7 +103,12 @@ function RecipePage() {
     const seconds = timer % 60;
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
-
+  function truncateText(text, maxLength) {
+    if (text.length > maxLength) {
+      return text.substring(0, maxLength) + '...';
+    }
+    return text;
+  }
   return (
     <View style={styles.pageContainer}>
       <VoiceTest onNext={onNext} onBack={onBack}></VoiceTest>
@@ -135,28 +147,31 @@ function RecipePage() {
           </View>
         ))}
       </ScrollView>
-      <View style={styles.ingredientsContainer}>
-        <Text style={styles.ingredientsTitle}>Ingredients</Text>
-        {steps[currentStepIndex] &&
-          steps[currentStepIndex].ingredients.map(
-            (ingredient, ingredientIndex) => (
-              <Text key={ingredientIndex} style={styles.ingredientText}>
-                {"\u2022"} {ingredient}
-              </Text>
-            )
-          )}
-      </View>
 
-      <View style={styles.timerContainer}>
-        <Text style={styles.timerText}>{formatTime()}</Text>
-        <TouchableOpacity
-          onPress={() => (timerRunning ? startTimer(0) : startTimer(120))}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>
-            {timerRunning ? "Stop Timer" : "Start Timer"}
-          </Text>
-        </TouchableOpacity>
+
+      <View style={styles.timerBackgrounContainer}>
+      <Text style={styles.ingredientsTitle}>Ingredients</Text>
+        <ScrollView style={styles.ingredientsContainer}>
+          {allIngredientsArray.map((ingredient, index) => (
+            <Text
+              key={index}
+              style={[
+                styles.ingredientText,
+                isIngredientInCurrentStep(ingredient) && styles.highlightedIngredient
+              ]}
+            >
+              {"\u2022 "}{truncateText(ingredient, 20)}
+            </Text>
+
+          ))}
+        </ScrollView>
+
+        <View style={styles.timerContainer}>
+          <Text style={styles.timerText}>{formatTime()}</Text>
+          <TouchableOpacity onPress={startTimer} style={styles.button}>
+            <Text style={styles.buttonText}>{timerRunning ? 'Stop Timer' : 'Start Timer'}</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -170,7 +185,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFCF2",
   },
   stepsContainer: {
-    flex: 0.7,
+    width: '63%',
     paddingLeft: 60,
     backgroundColor: "#FFFCF2",
     paddingTop: 100,
@@ -196,11 +211,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   ingredientsContainer: {
-    flex: 0.3,
-    padding: 10,
-    backgroundColor: "#A9B388",
-    paddingTop: 50,
+    width: '100%',
+    backgroundColor: '#A9B388',
+    paddingTop: 70,
     paddingLeft: 20,
+    paddingRight: 20,
+    marginBottom: 200,
+  },
+  belowingredientsContainer: {
+    width: '37%',
+    backgroundColor: '#A9B388',
+    marginTop: 600,
+
   },
   ingredientsTitle: {
     fontSize: 30,
@@ -211,19 +233,28 @@ const styles = StyleSheet.create({
   ingredientText: {
     fontSize: 24,
     marginTop: 5,
-    color: "#604933",
+    marginBottom: 5,
+    color: '#604933',
     fontFamily: "KaiseiDecol_400Regular",
   },
+  timerBackgrounContainer: {
+    width: '37%',
+    backgroundColor: '#A9B388',
+    paddingTop: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
+    marginTop: 0,
+  },
   timerContainer: {
-    position: "absolute",
-
+    position: 'absolute',
     bottom: 20,
-    backgroundColor: "#5f6f52",
+    right: 110,
+    backgroundColor: '#5f6f52',
     padding: 20,
     borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    right: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 30,
   },
   timerText: {
     fontSize: 48,
@@ -273,6 +304,11 @@ const styles = StyleSheet.create({
     fontFamily: "KaiseiDecol_400Regular",
     fontSize: 20,
   },
+  highlightedIngredient: {
+    color: '#FFFCF2',
+    fontWeight: 'bold',
+  },
+
 });
 
 export default RecipePage;
