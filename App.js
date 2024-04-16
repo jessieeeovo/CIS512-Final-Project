@@ -16,7 +16,6 @@ export default function App() {
           contentStyle: { backgroundColor: "#FFFCF2" },
           headerShown: false,
         }}
-        
       >
         <Stack.Screen name="HomePage" component={HomePage} />
         <Stack.Screen name="RecipePage" component={RecipePage} />

@@ -1,1 +1,89 @@
-{"name": "Butter Chicken", "steps": [{"step": 1, "title": "Prepare Chicken", "ingredients": ["Chicken (breasts, thighs, or legs as preferred)"], "instructions": "Trim the chicken, cutting breasts into halves and thighs into four chunks. If using legs, keep them whole."}, {"step": 2, "title": "Start Marinade", "ingredients": ["Salt", "pepper"], "instructions": "Season the chicken with a touch of salt and some pepper in a mixing bowl."}, {"step": 3, "title": "Add Spices to Marinade", "ingredients": ["1 tsp turmeric", "1 tsp cumin", "1 tsp ground coriander", "1 tsp cayenne pepper", "1 tsp Garam Masala"], "instructions": "Add the spices to the chicken, adjusting the amount to your preference."}, {"step": 4, "title": "Incorporate Yogurt and Oil", "ingredients": ["3 tbsp yogurt", "a little bit of oil"], "instructions": "Mix in yogurt and a bit of oil to help the marinade adhere to the chicken and set the seasonings in."}, {"step": 5, "title": "Marinate Chicken", "ingredients": [], "instructions": "Allow the chicken to marinate. For best results, marinate overnight."}, {"step": 6, "title": "Prepare Sauce Base", "ingredients": ["Red onion", "oil", "a few cardamom seeds", "a few cloves"], "instructions": "Slice red onion and saut\u00e9 in oil with crushed cardamom seeds and whole cloves until onions begin to caramelize."}, {"step": 7, "title": "Add Aromatics to Sauce", "ingredients": ["Ginger", "garlic", "chili"], "instructions": "Add roughly chopped ginger, garlic, and chili to the pan. Saut\u00e9 until fragrant."}, {"step": 8, "title": "Spice the Sauce", "ingredients": ["Butter", "a touch of Garam Masala", "turmeric", "cumin", "cayenne pepper"], "instructions": "Introduce butter to the pan along with a light dusting of the spices. Allow the mixture to caramelize and the spices to toast."}, {"step": 9, "title": "Cook Chicken", "ingredients": [], "instructions": "In a separate pan, start cooking the marinated chicken, ensuring to add all the marinade for flavor."}, {"step": 10, "title": "Create Tomato Base", "ingredients": ["Half a jar of tomato sauce"], "instructions": "Add tomato sauce to the onion and spice mixture, bringing it to a boil before introducing double cream."}, {"step": 11, "title": "Combine Chicken with Sauce", "ingredients": [], "instructions": "Once the chicken is partially cooked, combine it with the tomato and onion sauce mixture."}, {"step": 12, "title": "Finalize Sauce", "ingredients": ["Lemon juice", "additional butter", "salt", "pepper", "fresh cilantro"], "instructions": "Finish the sauce with a touch of lemon juice, more butter for richness, and adjust seasoning with salt and pepper. Add freshly chopped cilantro for garnish."}, {"step": 13, "title": "Serve", "ingredients": [], "instructions": "Serve the Butter Chicken hot with steamed rice or homemade chapatis."}]}
+{
+    "name": "Soulful Meal",
+    "steps": [
+      {
+        "step": 1,
+        "title": "Prepare Chicken",
+        "ingredients": ["Chicken wings", "Water", "Vinegar", "Lime"],
+        "instructions": "Rinse the chicken wings with water and a little vinegar, then scrub them with lime to ensure they are clean of feathers or dirt."
+      },
+      {
+        "step": 2,
+        "title": "Season Chicken",
+        "ingredients": ["Maggi seasoning", "Bouillon", "Ginger powder", "Black pepper", "Rosemary"],
+        "instructions": "Season the chicken with Maggi seasoning, a bit of bouillon, ginger powder, black pepper, and rosemary."
+      },
+      {
+        "step": 3,
+        "title": "Add Fresh Herbs",
+        "ingredients": ["Garlic", "Sage", "Thyme"],
+        "instructions": "Add crushed garlic, sage, and thyme to the chicken."
+      },
+      {
+        "step": 4,
+        "title": "Marinate in Buttermilk",
+        "ingredients": ["Buttermilk", "Hot sauce"],
+        "instructions": "Lightly cover the chicken with buttermilk, add a little hot sauce for flavor, and marinate overnight in the fridge."
+      },
+      {
+        "step": 5,
+        "title": "Prepare Candy Yams",
+        "ingredients": ["Sweet potatoes", "Salted butter", "Brown sugar"],
+        "instructions": "Peel and slice the sweet potatoes into half-inch rounds."
+      },
+      {
+        "step": 6,
+        "title": "Caramelize Sugar and Spices",
+        "ingredients": ["Salted butter", "Brown sugar", "Cinnamon", "Fresh ginger", "Fresh nutmeg"],
+        "instructions": "In a hot pan, melt the butter and brown sugar, then add cinnamon, grated fresh ginger, and nutmeg."
+      },
+      {
+        "step": 7,
+        "title": "Cook Candy Yams",
+        "ingredients": ["Vanilla extract"],
+        "instructions": "Stir in vanilla extract, add the sweet potatoes, cover, and simmer on low heat for 45 minutes."
+      },
+      {
+        "step": 8,
+        "title": "Prepare Macaroni Cheese Roux",
+        "ingredients": ["Butter", "Flour", "Evaporated milk"],
+        "instructions": "Melt butter in a pan, stir in flour to cook slightly, then gradually add evaporated milk."
+      },
+      {
+        "step": 9,
+        "title": "Add Cream and Cheese",
+        "ingredients": ["Heavy cream", "Cajun seasoning", "Garlic powder", "Black pepper", "Sharp cheddar cheese"],
+        "instructions": "Add heavy cream and seasonings to the roux, then mix in cheddar cheese until melted."
+      },
+      {
+        "step": 10,
+        "title": "Combine with Macaroni",
+        "ingredients": ["Cooked macaroni"],
+        "instructions": "Stir the cooked macaroni into the cheese sauce, then transfer to a baking dish."
+      },
+      {
+        "step": 11,
+        "title": "Bake Macaroni Cheese",
+        "ingredients": [],
+        "instructions": "Top with more cheddar cheese and bake at 350 degrees Fahrenheit for 25 minutes."
+      },
+      {
+        "step": 12,
+        "title": "Prepare Fried Chicken",
+        "ingredients": ["Potato starch", "Flour", "Cajun seasoning", "Seasoning salt", "Garlic powder"],
+        "instructions": "Mix potato starch, flour, and seasonings in a container; coat marinated chicken in this mix."
+      },
+      {
+        "step": 13,
+        "title": "Fry Chicken",
+        "ingredients": ["Canola oil"],
+        "instructions": "Heat oil to 350 degrees Fahrenheit, then fry chicken until crispy, about 11 minutes for wings."
+      },
+      {
+        "step": 14,
+        "title": "Cook Green Beans",
+        "ingredients": ["Butter", "Garlic", "Onion", "Cajun seasoning", "Better than Bouillon", "Canned green beans"],
+        "instructions": "Saute butter, garlic, onion, and seasonings, then add drained green beans and heat through."
+      }
+    ]
+  }
