@@ -159,11 +159,11 @@ class VoiceTest extends Component {
       //     )
       //   })}
       //   <Text style={styles.stat}>{`End: ${this.state.end}`}</Text>
-      <TouchableHighlight onPress={this._startRecognizing}>
+      <TouchableHighlight onPress={this._startRecognizing} style={styles.button}>
         <FontAwesome
           name="volume-up"
-          size={30}
-          color={"#5F6F52"}
+          size={25}
+          color={"#FFFCF2"}
           style={styles.searchIcon}
         />
       </TouchableHighlight>
@@ -212,6 +212,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#B0171F",
     marginBottom: 1,
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#A9B388",
+    borderRadius: 30,
+    width: 40,
+    height: 40,
   },
 });
 

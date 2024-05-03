@@ -8,6 +8,7 @@ import {
   Button,
   ScrollView,
   TouchableHighlight,
+  TouchableOpacity,
 } from "react-native";
 import {
   useFonts,
@@ -30,6 +31,11 @@ function HomePage({ navigation }) {
   const handleConvertPress = () => {
     navigation.navigate("RecipePage");
   };
+
+  const handleRecentPress = () => {
+    navigation.navigate("RecentPage");
+  };
+
   if (!fontsLoaded) {
     return;
   } else {
@@ -47,7 +53,7 @@ function HomePage({ navigation }) {
           />
           <TextInput
             style={styles.input}
-            placeholder={"https://never-gonna-give-up-video"}
+            placeholder={"Please paste a link of the video..."}
           />
         </View>
         <View style={{ alignItems: "center", marginTop: 20 }}>
@@ -62,14 +68,16 @@ function HomePage({ navigation }) {
         <Text style={styles.recentText}>Recent</Text>
         <View style={styles.recentRecipes}>
           <View style={styles.recipeCard}>
-            <Image
-              style={styles.image}
-              source={require("./../../assets/pasta.png")}
-            />
-            <Text style={styles.recipeTitle}>
-              GIGI HADID'S FAMOUS Pasta {"                          "}
-              <FontAwesome name="clock-o" size={20} /> 20min
-            </Text>
+            <TouchableOpacity onPress={handleRecentPress}>
+              <Image
+                style={styles.image}
+                source={require("./../../assets/pasta.png")}
+              />
+              <Text style={styles.recipeTitle}>
+                GIGI HADID'S FAMOUS Pasta {"                          "}
+                <FontAwesome name="clock-o" size={20} /> 20min
+              </Text>
+            </TouchableOpacity>
           </View>
           <View style={styles.recipeCard}>
             <Image
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#A9B388",
     width: "20%",
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
@@ -136,7 +144,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     paddingVertical: 5,
     marginHorizontal: 100,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
